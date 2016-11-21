@@ -1,9 +1,8 @@
-
 <?php
 
 /*
 
-	Template Name: Adopciones
+	Template Name: Adoptados
 
 */
 
@@ -17,15 +16,15 @@ get_header(); ?>
 	
 		<div class="main">
 		
-		<h2>En Adopción</h2>
+		<h2>Adoptados</h2>
 		
 		<div class="filtrar">
 			
 			<form id="filtro" name="form1" method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				<h4>Filtrar por :</h4>
-			    <input type="radio" name="radio" checked="checked" value="todos" <?php if ($_GET['tipo'] == 'todos')  echo ' checked="checked"';?>  onclick="window.location='<?php echo site_url(); ?>/adopciones/?tipo=todos'"> <label for="tipo">Todos</label> 
-				<input type="radio" name="radio" value="adulto" <?php if ($_GET['tipo'] == 'adulto')  echo ' checked="checked"';?>  onclick="window.location='<?php echo site_url(); ?>/adopciones/?tipo=adulto'"><label for="tipo">Adulto</label>
-				<input type="radio" name="radio" value="cachorro" <?php if ($_GET['tipo'] == 'cachorro')  echo ' checked="checked"';?> onclick="window.location='<?php echo site_url(); ?>/adopciones/?tipo=cachorro'"> <label for="tipo">Cachorro</label> 
+			    <input type="radio" name="radio" checked="checked" value="todos" <?php if ($_GET['tipo'] == 'todos')  echo ' checked="checked"';?>  onclick="window.location='<?php echo site_url(); ?>/adoptados/?tipo=todos'"> <label for="tipo">Todos</label> 
+				<input type="radio" name="radio" value="adulto" <?php if ($_GET['tipo'] == 'adulto')  echo ' checked="checked"';?>  onclick="window.location='<?php echo site_url(); ?>/adoptados/?tipo=adulto'"><label for="tipo">Adulto</label>
+				<input type="radio" name="radio" value="cachorro" <?php if ($_GET['tipo'] == 'cachorro')  echo ' checked="checked"';?> onclick="window.location='<?php echo site_url(); ?>/adoptados/?tipo=cachorro'"> <label for="tipo">Cachorro</label> 
 			  
    			 </form>
 		</div><!-- Fin del filtro -->
@@ -47,6 +46,7 @@ get_header(); ?>
 				$tipo = $_POST['radio'];
 				
 			?>
+
 			<?php 
 				$args = array (
 			      'post_type' => 'adopcion',
@@ -57,6 +57,11 @@ get_header(); ?>
 			      	array (
 			      		'key' => 'tipo',
 			      		'value' => $_GET['tipo'],
+			      		'compare' => '!='
+			      	),
+			      	array (
+			      		'key' => 'adoptado',
+			      		'value' => 'no',
 			      		'compare' => '!='
 			      	)
 			      
@@ -89,6 +94,7 @@ get_header(); ?>
 					<!--<a href=""><img src="<?php the_field('foto_principal'); ?>"></a>-->
 				</div>
 				<a href="<?php the_permalink(); ?>"><?php the_field('nombre'); ?></a>
+
 				
 			</li>
 			<?php endwhile; ?>
